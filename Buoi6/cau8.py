@@ -29,20 +29,47 @@ class LinkedList:
             temp_node = temp_node.next
         return result
     
-    def mergeLinkedList(self, l1, l2):
-        l = l1 + l2
-        if len(l) not in range(50):
-            raise Exception("Sorry, The number of nodes in both lists is in the range [0, 50].")
-        for ele in l:
-            if -100 >= ele or ele >= 100:
-                raise ValueError("Sorry, -100 <= Node.val <= 100")
-        l.sort()
-        for element in l:
-            self.append(element)
-        
-new_linked_list = LinkedList()
-list1 = [1,2,4]
-list2 = [4,1,5,9,1]
-new_linked_list.mergeLinkedList(list1, list2)
-print(new_linked_list.__str__())
+def mergeTwoLists(list1,list2):
+    tmp = Node(None)
+    cur = tmp
+
+    while list1 and list2:
+        if list1.value <  list2.value:
+            cur.next = list1
+            list1 = list1.next
+        else:
+            cur.next = list2
+            list2 = list2.next
+        cur = cur.next
+    cur.next = list1 if list1 else list2
+    
+    return tmp.next
+
+new_linked_list1 = LinkedList()
+new_linked_list1.append(2)
+new_linked_list1.append(3)
+new_linked_list1.append(4)
+new_linked_list1.append(5)
+new_linked_list1.append(9)
+
+new_linked_list2 = LinkedList()
+new_linked_list2.append(3)
+new_linked_list2.append(4)
+new_linked_list2.append(6)
+new_linked_list2.append(7)
+
+print(new_linked_list1.__str__())
+print(new_linked_list2.__str__())
+merge_head = mergeTwoLists(new_linked_list1.head,new_linked_list2.head)
+while merge_head:
+    print(merge_head.value, end="")
+    if merge_head.next:
+        print("->",end="")
+    merge_head = merge_head.next
+
+
+
+
+
+
 
